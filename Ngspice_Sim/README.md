@@ -2,10 +2,10 @@
 
 ## Source file
 
-.cir -- The circle file /
+.cir -- The circle file 
 
 ## Output file
 
-The figure is output by gnuplot /
-.plt  the gnuplot format /
-.png  the picture format /
+The figure is output by gnuplot 
+.plt  the gnuplot format 
+.png  the picture format 

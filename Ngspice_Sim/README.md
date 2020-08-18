@@ -6,6 +6,6 @@
 
 ## Output file
 
-The figure is output by gnuplot 
-.plt  the gnuplot format 
+The figure is output by gnuplot \
+.plt  the gnuplot format \
 .png  the picture format 

@@ -14,10 +14,10 @@ set yrange [1.700000e-01:8.300000e-01]
 set border lw 3
 set format y "%g"
 set format x "%g"
-plot 'diode2.cir.data' using 1:2 with lines lw 3 title "out"
+plot 'diode2.data' using 1:2 with lines lw 3 title "out"
 set terminal push
 set terminal png noenhanced
-set out 'diode2.cir.png'
+set out 'diode2.png'
 replot
 set term pop
 replot

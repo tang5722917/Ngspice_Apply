@@ -11,7 +11,7 @@ D1 1 0 DNORM
  set gridstyle=lingrid  
  set xbrushwidth=3   
  set gnuplot_terminal=png
- gnuplot DIODE2.CIR Out xlimit 0mA 12mA  ylimit 0.2 0.8V xlabel 'Voltage/V'  ylabel 'Current/A' title 'Current Drive' 
+ gnuplot DIODE2 Out xlimit 0mA 12mA  ylimit 0.2 0.8V xlabel 'Voltage/V'  ylabel 'Current/A' title 'Current Drive' 
  *X轴范围  Y轴范围  X轴名称 Y轴名称  标题名称
 .endc
 .END

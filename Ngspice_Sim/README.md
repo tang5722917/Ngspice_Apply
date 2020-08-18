@@ -7,5 +7,6 @@
 ## Output file
 
 The figure is output by gnuplot \
-.plt  the gnuplot format \
+.plt  the gnuplot command script \
+.data the output data \
 .png  the picture format 

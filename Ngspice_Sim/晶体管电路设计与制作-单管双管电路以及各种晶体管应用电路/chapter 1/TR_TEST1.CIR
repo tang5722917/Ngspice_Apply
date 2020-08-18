@@ -1,0 +1,22 @@
+TR_TEST1.CIR - IB vs VBE, IC vs VBE, IC vs IB..
+* ngspice -a TR_TEST1.CIR
+* Test circuit for the understanding of 
+* Bipolar Junction Transitor's operation
+*
+VCC 2 0 DC 5V ;Supply Voltage 
+VBbias 1 0 DC 1V ;VBE=VBbias
+Q1 2 1 0 QNORM
+.MODEL QNORM NPN(IS=1E-14 BF=100)
+.PROBE Out1 = par('-I(VBbias)')
+.PROBE Out2 = par('-I(VCC)')
+.control
+ DC VBbias 0.5V 0.7V 0.002V
+ *Output format Control
+ set gridstyle=lingrid  
+ set xbrushwidth=3   
+ set gnuplot_terminal=png
+ gnuplot TR_TEST1_I(bias) Out1 ylimit 0uA 60uA xlimit 500mV 700mV xlabel 'Voltage/V'  ylabel 'Current/A' title 'TR_TEST1_I(bias)' 
+ gnuplot TR_TEST1_I(C) Out2 ylimit 0mA 6mA xlimit 500mV 700mV xlabel 'Voltage/V'  ylabel 'Current/A' title 'TR_TEST1_I(C)'
+ *X轴范围  Y轴范围  X轴名称 Y轴名称  标题名称
+.endc
+.END

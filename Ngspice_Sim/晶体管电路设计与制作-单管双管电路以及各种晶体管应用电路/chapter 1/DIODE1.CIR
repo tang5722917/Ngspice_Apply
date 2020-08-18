@@ -1,0 +1,15 @@
+DIODE1.CIR    ;Voltage Drive
+*ngspice -a DIODE1.CIR    //Export figure directly
+.MODEL DNORM D(IS=1E-14)
+VS 1 0 DC 1V 
+D1 1 0 DNORM 
+.PROBE Out = par('-I(VS)')
+.control
+DC VS -0.8V 0.7V 0.004V
+*Output format Control
+set color0=white
+set xbrushwidth=2
+set gnuplot_terminal=png
+gnuplot DIODE1 Out xlimit -0.8 0.8 ylimit -0.002  0.008 ylabel 'Current/A' xlabel 'Voltage/V' title 'Voltage Drive' 
+.endc
+.END

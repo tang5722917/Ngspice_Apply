@@ -1,0 +1,20 @@
+IC_VCE.CIR - Test circuit
+* ngspice -a IC_VCE.CIR
+* Test circuit for the understanding of 
+* Bipolar Junction Transitor's operation
+*
+VCE 2 0 DC 1V ;Supply Voltage 
+Q1 2 1 0 QNORM
+IB 0 1 DC 1A
+.MODEL QNORM NPN(IS=1E-14 BF=100)
+.PROBE Out = par('-I(VCE)')
+.control
+ *Output format Control
+ DC VCE 0V 5V 0.01V IB 10U 40U 10U
+ set gridstyle=lingrid  
+ set xbrushwidth=3   
+ set gnuplot_terminal=png
+ gnuplot IC_VCE Out ylimit 0mA 6mA xlimit 0V 5V xlabel 'V(CE) Voltage/V'  ylabel 'I(CE) Current/A' title 'IC_VCE' 
+ *X轴范围  Y轴范围  X轴名称 Y轴名称  标题名称
+.endc
+.END

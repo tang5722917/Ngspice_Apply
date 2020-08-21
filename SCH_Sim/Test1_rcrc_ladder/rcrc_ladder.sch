@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:Test1-cache
 EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
@@ -50,17 +49,6 @@ F 3 "~" H 6150 4400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L pspice:0 #GND03
-U 1 1 5F3BD38C
-P 7000 4400
-F 0 "#GND03" H 7000 4300 50  0001 C CNN
-F 1 "0" H 7000 4489 50  0000 C CNN
-F 2 "" H 7000 4400 50  0001 C CNN
-F 3 "~" H 7000 4400 50  0001 C CNN
-	1    7000 4400
-	1    0    0    -1  
-$EndComp
-$Comp
 L pspice:R R1
 U 1 1 5F3BDB87
 P 5600 3200
@@ -72,40 +60,16 @@ F 3 "~" H 5600 3200 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L pspice:R R2
-U 1 1 5F3BF000
-P 6550 3200
-F 0 "R2" V 6345 3200 50  0000 C CNN
-F 1 "1k" V 6436 3200 50  0000 C CNN
-F 2 "" H 6550 3200 50  0001 C CNN
-F 3 "~" H 6550 3200 50  0001 C CNN
-	1    6550 3200
-	0    1    1    0   
-$EndComp
-$Comp
 L pspice:C C1
 U 1 1 5F3C03BE
 P 6150 3850
 F 0 "C1" H 6328 3896 50  0000 L CNN
-F 1 "1u" H 6328 3805 50  0000 L CNN
+F 1 "0.1u" H 6328 3805 50  0000 L CNN
 F 2 "" H 6150 3850 50  0001 C CNN
 F 3 "~" H 6150 3850 50  0001 C CNN
 	1    6150 3850
 	1    0    0    -1  
 $EndComp
-$Comp
-L pspice:C C2
-U 1 1 5F3C14EB
-P 7000 3850
-F 0 "C2" H 7178 3896 50  0000 L CNN
-F 1 "100n" H 7178 3805 50  0000 L CNN
-F 2 "" H 7000 3850 50  0001 C CNN
-F 3 "~" H 7000 3850 50  0001 C CNN
-	1    7000 3850
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	7000 4100 7000 4400
 Wire Wire Line
 	6150 4100 6150 4400
 Wire Wire Line
@@ -114,25 +78,18 @@ Wire Wire Line
 	6150 3600 6150 3200
 Connection ~ 6150 3200
 Wire Wire Line
-	6150 3200 6300 3200
-Wire Wire Line
-	6800 3200 7000 3200
-Wire Wire Line
-	7000 3600 7000 3200
-Connection ~ 7000 3200
-Wire Wire Line
 	5350 3200 4900 3200
 Wire Wire Line
 	4900 3200 4900 3550
 Text GLabel 4500 3200 0    50   Input ~ 0
 IN
-Text GLabel 8000 3200 2    50   Input ~ 0
+Text GLabel 6950 3200 2    50   Input ~ 0
 OUT
 Wire Wire Line
 	4500 3200 4900 3200
 Connection ~ 4900 3200
-Wire Wire Line
-	7000 3200 8000 3200
 Text Notes 4600 4600 0    50   ~ 0
 .ac dec 10 1 100k
+Wire Wire Line
+	6150 3200 6950 3200
 $EndSCHEMATC

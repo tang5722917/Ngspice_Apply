@@ -1,0 +1,18 @@
+ BJT: Bipolar Junction Transistor
+     device                    q1
+      model                 qnorm
+         ic           0.000567976
+         ib           5.67976e-06
+         ie          -0.000573656
+        vbe              0.640487
+        vbc              -5.67975
+         gm             0.0219593
+        gpi           0.000219593
+        gmu                 1e-12
+         gx                     0
+         go           6.70529e-22
+        cpi                     0
+        cmu                     0
+        cbx                     0
+       csub                     0
+

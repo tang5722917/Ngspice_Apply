@@ -1,0 +1,29 @@
+CE00.CIR - 1 Transitor circuit
+* ngspice -a CE00.CIR
+************************
+*    Operating  Point
+************************
+VCC 4 0 DC 12V ;Supply Voltage 
+Vs 1 0 AC 1V SIN(0 0.01V 1KHZ) ;Inport source
+C1 1 2 4.7U
+RB 4 2 2MEG
+RC 4 3 10K
+Q1 3 2 0 QNORM
+.MODEL QNORM NPN(IS=1E-14 BF={HFE} xtb=1.7)
+.PARAM HFE=100
+
+*.STEP PARAM HFE LIST 50 100 200
+.control
+ op
+ print ALL > CE00_OP.Out
+ show Q1  > CE00_BJT.Out
+ *Output format Control
+ *AC DEC 20 10 100K
+ *set gridstyle=lingrid  
+ *set xbrushwidth=3   
+ *set gnuplot_terminal=png
+ *gnuplot TR_TEST2_I(B) Out1 ylimit 0uA 100uA xlimit 400mV 800mV xlabel 'V(bias) Voltage/V'  ylabel 'I(B) Current/A' title 'TR_TEST2_I(B) Temperature:0,25,50,75,100' 
+ *gnuplot TR_TEST2_I(C) Out2 ylimit 0MA 10mA xlimit 400mV 800mV xlabel 'V(bias) Voltage/V'  ylabel 'I(C) Current/A' title 'TR_TEST2_I(C) Temperature:0,25,50,75,100' 
+ *X轴范围  Y轴范围  X轴名称 Y轴名称  标题名称
+.endc
+.END

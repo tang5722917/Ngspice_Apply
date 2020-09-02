@@ -1,0 +1,39 @@
+CE00A.CIR - 1 Transitor circuit
+* ngspice -a CE00A.CIR
+************************
+*    Different HFE
+************************
+VCC 4 0 DC 12V ;Supply Voltage 
+VS 1 0 AC 1 SIN(0 0.01V 1KHZ) ;Import source
+C1 1 2 4.7U
+RB 4 2 2MEG
+RC 4 3 10K
+Q1 3 2 0 QNORM
+
+.MODEL QNORM NPN(IS=1E-14 BF={HFE} xtb=1.7)
+.PARAM HFE=50
+.tran 10us 2ms 0 10us 
+.control
+ let start_HFE = 50
+ let stop_HFE = 200
+ let delta_HFE = 50
+ let HFE_act = start_HFE
+ * loop
+ *.STEP PARAM HFE LIST 50 100 150 200
+ while HFE_act le stop_HFE
+    altermod QNORM BF = HFE_act
+    run
+    write HFE-sweep.out V(3)
+    set appendwrite
+    let HFE_act = HFE_act + delta_HFE
+end
+ *Output format Control
+ set gridstyle=lingrid
+ set xbrushwidth=3   
+ set logscale x
+ set gnuplot_terminal=png
+ *plot  tran1.V(3) tran2.V(3) tran3.V(3) tran4.V(3)
+ gnuplot CE00A_HFE tran1.V(3) tran2.V(3) tran3.V(3) tran4.V(3) ylimit 0 12 xlimit 0 0.002 xlabel 'Frequency Hz'  ylabel 'Vo/Vs DB' title 'CE00 frequency characteristic' 
+ *X轴范围  Y轴范围  X轴名称 Y轴名称  标题名称
+.endc
+.END

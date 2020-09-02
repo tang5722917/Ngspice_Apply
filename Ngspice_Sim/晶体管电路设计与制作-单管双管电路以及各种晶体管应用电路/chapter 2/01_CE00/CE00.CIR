@@ -4,7 +4,7 @@ CE00.CIR - 1 Transitor circuit
 *    Operating  Point
 ************************
 VCC 4 0 DC 12V ;Supply Voltage 
-VS 1 0 AC 1 SIN(0 0.01V 1KHZ) ;Inport source
+VS 1 0 AC 1 SIN(0 0.01V 1KHZ) ;Import source
 C1 1 2 4.7U
 RB 4 2 2MEG
 RC 4 3 10K

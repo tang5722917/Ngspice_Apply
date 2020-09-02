@@ -15,10 +15,10 @@ set border lw 3
 set format y "%g"
 set format x "%g"
 set label 1 "HFE=" at 0.0013,12 center textcolor rgb "#FF0000"
-set label 2 "50" at 0.0015,12 center textcolor rgb "#FF0000"
-set label 3 "100" at 0.0015,11.2 center textcolor rgb "#FF0000"
-set label 4 "150" at 0.0015,10.4 center textcolor rgb "#FF0000"
-set label 5 "200" at 0.0015,9.6 center textcolor rgb "#FF0000"
+set label 2 "50" at 0.0014,12 center textcolor rgb "#FF0000"
+set label 3 "100" at 0.0014,11.2 center textcolor rgb "#FF0000"
+set label 4 "150" at 0.0014,10.4 center textcolor rgb "#FF0000"
+set label 5 "200" at 0.0014,9.6 center textcolor rgb "#FF0000"
 plot 'ce00a_hfe.data' using 1:2 with lines lw 3 title "tran1.v(3)",\
 'ce00a_hfe.data' using 3:4 with lines lw 3 title "tran2.v(3)",\
 'ce00a_hfe.data' using 5:6 with lines lw 3 title "tran3.v(3)",\

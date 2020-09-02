@@ -2,8 +2,8 @@
 
 ## Source file
 
-.cir -- The circle file 
-.lib -- The Spice lib file
+.cir -- The circle file \
+.lib -- The Spice lib file \
 
 ## Output file
 

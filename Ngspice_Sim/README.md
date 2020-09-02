@@ -3,7 +3,7 @@
 ## Source file
 
 .cir -- The circle file \
-.lib -- The Spice lib file \
+.lib -- The Spice lib file
 
 ## Output file
 

@@ -1,9 +1,9 @@
-CE01.CIR - 1 Transitor circuit
-* ngspice -a CE01.CIR
+CE01A.CIR - 1 Transitor circuit
+* ngspice -a CE01A.CIR
 ************************
 *    BIAS TYPE no.
 *    ARAM HFE = 120 170 240
-*    Transient simulation
+*    AC simulation
 ************************
 
 VCC 5 0 DC 5V ;Supply Voltage 
@@ -26,25 +26,28 @@ CL 7 0 300P
 +                 BR=3.6 VA=100 RB=50 RC=0.76
 +                 IK=0.25 CJC=4.8P CJE=18P TF=0.5N TR=20N)
 .PARAM HFE = 50
-.tran 10us 2ms 0 10us 
+.ac DEC 20 10 100K
 
 .control
  *.STEP PARAM HFE LIST 120 170 240
  altermod QC1815 BF = 120
  run
- write HFE-sweep.out V(6)
+ let OutDB=DB(VM(6)/VM(1))
+ write HFE-sweepAC.out OutDB
  set appendwrite
  altermod QC1815 BF = 170
  run
- write HFE-sweep.out V(6)
+ let OutDB=DB(VM(6)/VM(1))
+ write HFE-sweepAC.out OutDB
  set appendwrite
  altermod QC1815 BF = 240
  run
- write HFE-sweep.out V(6)
+ let OutDB=DB(VM(6)/VM(1))
+ write HFE-sweepAC.out OutDB
  set appendwrite
 
  *Output Ascii format data
- wrdata Sweep_HFE.out tran1.V(6) tran2.V(6) tran3.V(6)
+ wrdata SweepAC_HFE.out ac1.OutDB ac2.OutDB ac3.OutDB
 
 .endc
 .END

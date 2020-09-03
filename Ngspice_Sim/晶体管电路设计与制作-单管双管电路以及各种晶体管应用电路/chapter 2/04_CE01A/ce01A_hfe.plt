@@ -19,7 +19,7 @@ plot 'SweepAC_HFE.out' using 1:2 with lines lw 3 title "HFE = 120",\
 	 'SweepAC_HFE.out' using 5:6 with lines lw 3 title "HFE = 240"
 set terminal push
 set terminal png noenhanced
-set out 'ce01_hfe.png'
+set out 'ce01a_hfe.png'
 replot
 set term pop
 replot

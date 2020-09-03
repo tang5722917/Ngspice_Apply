@@ -1,5 +1,5 @@
 set termoption noenhanced
-set title "ce01a.cir - 1 transitor circuit"
+set title "ce01.cir - 1 transitor circuit"
 set xlabel "s"
 set ylabel "V"
 set grid lw 2

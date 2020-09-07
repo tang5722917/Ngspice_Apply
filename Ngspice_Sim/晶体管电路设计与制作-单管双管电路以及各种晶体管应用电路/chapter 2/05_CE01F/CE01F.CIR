@@ -1,0 +1,35 @@
+CE01F.CIR - 1 Transitor circuit
+* ngspice -a CE01F.CIR
+************************
+*    BIAS TYPE no.
+*    Fourier simulation
+*    HFE = 170
+************************
+
+VCC 5 0 DC 5V ;Supply Voltage 
+VS 1 0 AC 1V SIN(0 0.1 1KHZ) ;Import source
+C1 1 2 3.3U
+RB1 2 3 4.7K
+RB2 4 3 220K
+Q1 4 3 0 QC1815   ;2SC1815(Y)
+RC 5 4 1.5K
+R1 4 6 220
+C2 6 7 1.5U
+RL1 7 0 1MEG
+CL 7 0 300P
+
+.MODEL QC1815 NPN(IS=1E-14 BF={HFE} xtb=1.7
++                 BR=3.6 VA=100 RB=50 RC=0.76
++                 IK=0.25 CJC=4.8P CJE=18P TF=0.5N TR=20N)
+.PARAM HFE = 170
+.tran 10us 2ms 0 10us
+
+.control
+ 
+ alter VS VA = 0.01
+ run
+ plot V(7)
+ fourier 1KHz V(6) > CE01_fourier1.out
+
+.endc
+.END

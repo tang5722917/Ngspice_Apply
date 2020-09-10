@@ -1,0 +1,78 @@
+CE02F.CIR - 1 Transitor circuit
+* ngspice -a CE02F.CIR
+************************
+*    Common Emitter Bias Type No.2
+*    Fourier simulation
+*    Measure the THD characteristic
+*    HFE = 170
+*    Need deal the data by hand
+************************
+
+VCC 6 0 DC 12V ;Supply Voltage 
+VS 1 0 AC 1V SIN(0 {VA} 1KHZ) ;Import source
+C1 1 2 2.2U
+R1 2 3 100
+RB1 6 3 100K
+RB2 3 0 27K
+Q1 4 3 5 QC1815   ;2SC1815(Y)
+RC 6 4 4.7K
+RE 5 0 2K
+C2 5 0 1000U
+R2 4 7 220
+C3 7 8 1.5U
+RL1 8 0 1MEG
+CL1 8 0 300P
+C4 7 9 220U
+RL2 9 0 6K
+
+.MODEL QC1815 NPN(IS=1E-14 BF={HFE} xtb=1.7
++                 BR=3.6 VA=100 RB=50 RC=0.76
++                 IK=0.25 CJC=4.8P CJE=18P TF=0.5N TR=20N)
+.PARAM HFE = 50
+.PARAM VA = 0.01
+.tran 10us 2ms 0
+
+.control
+ let ymax = 0
+ alterparam VA = 0.001
+ reset
+ run
+ meas tran ymax RMS V(9) from=0m to=2m
+ write Voltage_RMS.out ymax
+ set appendwrite
+ fourier 1KHz V(9) > CE02_fourier1.out
+ let ymax = 0
+ alterparam VA = 0.002
+ reset
+ run
+ meas tran ymax RMS V(9) from=0m to=2m
+ write Voltage_RMS.out ymax
+ set appendwrite
+ fourier 1KHz V(9) > CE02_fourier2.out
+  let ymax = 0
+ alterparam VA = 0.005
+ reset
+ run
+ meas tran ymax RMS V(9) from=0m to=2m
+ write Voltage_RMS.out ymax
+ set appendwrite
+ fourier 1KHz V(9) > CE02_fourier3.out
+  let ymax = 0
+ alterparam VA = 0.01
+ reset
+ run
+ meas tran ymax RMS V(9) from=0m to=2m
+ write Voltage_RMS.out ymax
+ set appendwrite
+ fourier 1KHz V(9) > CE02_fourier4.out
+  let ymax = 0
+ alterparam VA = 0.02
+ reset
+ run
+ meas tran ymax RMS V(9) from=0m to=2m
+ write Voltage_RMS.out ymax
+ set appendwrite
+ fourier 1KHz V(9) > CE02_fourier5.out
+
+.endc
+.END

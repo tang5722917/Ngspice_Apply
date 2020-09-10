@@ -1,7 +1,7 @@
 set termoption noenhanced
-set title "ce02.cir - 1 transitor circuit"
-set xlabel "s"
-set ylabel "V(7) /V"
+set title "CE2A.cir - 1 transitor circuit"
+set xlabel "Frequency /Hz"
+set ylabel "Gain /DB"
 set grid lw 2
 set logscale x 
 set xrange [1.000000e+01:1.000000e05]

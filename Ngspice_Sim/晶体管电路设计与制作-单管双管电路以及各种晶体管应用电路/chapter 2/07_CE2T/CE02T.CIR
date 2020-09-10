@@ -1,0 +1,51 @@
+CE02T.CIR - 1 Transitor circuit
+* ngspice -a CE02T.CIR
+************************
+*    Common Emitter Bias Type No.2
+*    PARAM HFE = 170
+*    Sweep temperature 0 25 50
+*    Transient simulation
+************************
+
+VCC 6 0 DC 12V ;Supply Voltage 
+VS 1 0 AC 1V SIN(0 10mV 1KHZ) ;Import source
+C1 1 2 2.2U
+R1 2 3 100
+RB1 6 3 100K
+RB2 3 0 27K
+Q1 4 3 5 QC1815   ;2SC1815(Y)
+RC 6 4 4.7K
+RE 5 0 2K
+C2 5 0 1000U
+R2 4 7 220
+C3 7 8 1.5U
+RL1 8 0 1MEG
+CL1 8 0 300P
+
+*.options TNOM = {TP}
+.PARAM TP = 100
+.TEMP TP
+.MODEL QC1815 NPN(IS=1E-14 BF={HFE} xtb=1.7
++                 BR=3.6 VA=100 RB=50 RC=0.76
++                 IK=0.25 CJC=4.8P CJE=18P TF=0.5N TR=20N)
+.PARAM HFE = 170
+.tran 10us 2ms 0 10us TEMP 0 100
+.control
+ *.STEP TEMP LIST 0 25 50
+ option TEMP = 0
+ run
+ write HFE-sweep.out V(7)
+ set appendwrite
+ option TEMP = 25
+ run
+ write HFE-sweep.out V(7)
+ set appendwrite
+ option TEMP = 50
+ run
+ write HFE-sweep.out V(7)
+ set appendwrite
+
+ *Output Ascii format data
+ wrdata Sweep_HFE.out tran1.V(7) tran2.V(7) tran3.V(7)
+.endc
+.END

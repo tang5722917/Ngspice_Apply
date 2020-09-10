@@ -1,48 +1,49 @@
-CE01A.CIR - 1 Transitor circuit
-* ngspice -a CE01A.CIR
+CE02A.CIR - 1 Transitor circuit
+* ngspice -a CE02A.CIR
 ************************
-*    BIAS TYPE no.
+*    Common Emitter Bias Type No.2
 *    PARAM HFE = 120 170 240
-*    AC simulation
+*    AC characteristic
+*    Transient simulation
 ************************
 
-VCC 5 0 DC 5V ;Supply Voltage 
-VS 1 0 AC 1V SIN(0 0.05V 1KHZ) ;Import source
-C1 1 2 3.3U
-RB1 2 3 4.7K
-RB2 4 3 220K
-Q1 4 3 0 QC1815   ;2SC1815(Y)
-RC 5 4 1.5K
-R1 4 6 220
-C2 6 7 1.5U
-RL1 7 0 1MEG
-CL 7 0 300P
+VCC 6 0 DC 12V ;Supply Voltage 
+VS 1 0 AC 1V SIN(0 10mV 1KHZ) ;Import source
+C1 1 2 2.2U
+R1 2 3 100
+RB1 6 3 100K
+RB2 3 0 27K
+Q1 4 3 5 QC1815   ;2SC1815(Y)
+RC 6 4 4.7K
+RE 5 0 2K
+C2 5 0 1000U
+R2 4 7 220
+C3 7 8 1.5U
+RL1 8 0 1MEG
+CL1 8 0 300P
 
-*C3 6 8 220U
-*RL2 8 0 6K
-*.FOUR 1KHz V(8)
 
 .MODEL QC1815 NPN(IS=1E-14 BF={HFE} xtb=1.7
 +                 BR=3.6 VA=100 RB=50 RC=0.76
 +                 IK=0.25 CJC=4.8P CJE=18P TF=0.5N TR=20N)
 .PARAM HFE = 50
-.ac DEC 20 10 100K
+.AC DEC 20 10 100K
 
 .control
  *.STEP PARAM HFE LIST 120 170 240
  altermod QC1815 BF = 120
  run
- let OutDB=DB(VM(6)/VM(1))
+ let OutDB=DB(VM(8)/VM(1))
  write HFE-sweepAC.out OutDB
  set appendwrite
  altermod QC1815 BF = 170
  run
- let OutDB=DB(VM(6)/VM(1))
+ let OutDB=DB(VM(8)/VM(1))
  write HFE-sweepAC.out OutDB
  set appendwrite
  altermod QC1815 BF = 240
  run
- let OutDB=DB(VM(6)/VM(1))
+ let OutDB=DB(VM(8)/VM(1))
  write HFE-sweepAC.out OutDB
  set appendwrite
 

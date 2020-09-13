@@ -1,0 +1,42 @@
+EMF1.CIR - 1 Transitor emitter follower
+* ngspice -a EMF1.CIR
+************************
+*    Transitor emitter followe
+*    AC characteristic
+************************
+
+VCC 5 0 DC 12V ;Supply Voltage 
+VS 1 0 AC 1V SIN(0 3 1KHz) ;Import source
+C1 1 2 10U
+R1 5 2 20K
+R2 2 0 22K
+R3 2 3 100
+R4 4 0 1K
+R5 4 6 100
+C2 6 7 1.5U
+Q1 5 3 4 QC2602   ;2SC2602
+C3 6 8 220U
+RL1 7 0 1MEG
+CL 7 0 300P
+RL2 8 0 6K
+
+
+.MODEL QC2602 NPN ( IS=1.7E-13 BF=500 XTB=1.7
++                 VA=100 IK=0.3 RB=3 CJC=21P 
++                 CJE=80P TF=0.9N TR=36N )
+.AC DEC 20 10 10MEG
+*.tran 5us 5ms 0 5us
+.control
+ run
+ let OutDB=DB(VM(7)/VM(1))
+ let OutdPH=180/PI*VP(7)
+
+*Output format Control
+ set gridstyle=lingrid 
+ set xbrushwidth=3   
+ set logscale x
+ set gnuplot_terminal=png
+ gnuplot EMF1_frequency OutDB ylimit 1 -7 xlimit 10 10000000 xlabel 'Frequency /Hz'  ylabel 'Vo/Vs /DB' title 'Transitor emitter follower frequency characteristic' 
+ *X轴范围  Y轴范围  X轴名称 Y轴名称  标题名称
+.endc
+.END

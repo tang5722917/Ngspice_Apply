@@ -1,0 +1,82 @@
+EMF1.CIR - 1 Transitor emitter follower
+* ngspice -a EMF1F.CIR
+************************
+*    Transitor emitter followe
+*    Fourier simulation
+*    Measure the THD characteristic
+*    Need deal the data by hand
+************************
+
+VCC 5 0 DC 12V ;Supply Voltage 
+VS 1 0 AC 1V SIN(0 {VA} 1KHz) ;Import source
+C1 1 2 10U
+R1 5 2 20K
+R2 2 0 22K
+R3 2 3 100
+R4 4 0 1K
+R5 4 6 100
+C2 6 7 1.5U
+Q1 5 3 4 QC2602   ;2SC2602
+C3 6 8 220U
+RL1 7 0 1MEG
+CL 7 0 300P
+RL2 8 0 6K
+
+
+.MODEL QC2602 NPN ( IS=1.7E-13 BF=500 XTB=1.7
++                 VA=100 IK=0.3 RB=3 CJC=21P 
++                 CJE=80P TF=0.9N TR=36N )
+.PARAM VA = 0.01
+.tran 10us 2ms 0
+
+.control
+let ymax = 0
+ alterparam VA = 0.05
+ reset
+ run
+ meas tran ymax RMS V(8) from=0m to=2m
+ write Voltage_RMS.out ymax
+ set appendwrite
+ fourier 1KHz V(8) > EMF1_fourier1.out
+ let ymax = 0
+ alterparam VA = 0.1
+ reset
+ run
+ meas tran ymax RMS V(8) from=0m to=2m
+ write Voltage_RMS.out ymax
+ set appendwrite
+ fourier 1KHz V(8) > EMF1_fourier2.out
+  let ymax = 0
+ alterparam VA = 0.2
+ reset
+ run
+ meas tran ymax RMS V(8) from=0m to=2m
+ write Voltage_RMS.out ymax
+ set appendwrite
+ fourier 1KHz V(8) > EMF1_fourier3.out
+  let ymax = 0
+ alterparam VA = 0.5
+ reset
+ run
+ meas tran ymax RMS V(8) from=0m to=2m
+ write Voltage_RMS.out ymax
+ set appendwrite
+ fourier 1KHz V(8) > EMF1_fourier4.out
+  let ymax = 0
+ alterparam VA = 1
+ reset
+ run
+ meas tran ymax RMS V(8) from=0m to=2m
+ write Voltage_RMS.out ymax
+ set appendwrite
+ fourier 1KHz V(8) > EMF1_fourier5.out
+ let ymax = 0
+ alterparam VA = 2
+ reset
+ run
+ meas tran ymax RMS V(8) from=0m to=2m
+ write Voltage_RMS.out ymax
+ set appendwrite
+ fourier 1KHz V(8) > EMF1_fourier6.out 
+.endc
+.END

@@ -1,0 +1,40 @@
+HIPASS.CIR - 1 HIPASS circuit
+* ngspice -a HIPASS.CIR
+************************
+*    HIPASS - Sallen & Key HPF
+*    2nd. order Butterworth
+************************
+
+VCC 5 0 DC 12V ;Supply Voltage 
+VS 10 0 AC 1V  ;Import source
+RS 10 11 50
+C1 11 12 0.027U
+C2 12 2 0.027U
+R6 12 4 5.1K
+R1 5 2 20K
+R2 2 0 22K
+R3 2 3 100
+R4 4 0 1K
+R5 4 6 100
+C3 OUT 6 1.5U
+RL OUT 0 1MEG
+CL OUT 0 300P
+Q1 5 3 4 QC1815   ;2SC1815(Y)
+
+
+.MODEL QC1815 NPN(IS=1E-14 BF={HFE} xtb=1.7
++                 BR=3.6 VA=100 RB=50 RC=0.76
++                 IK=0.25 CJC=4.8P CJE=18P TF=0.5N TR=20N)
+.PARAM HFE = 50
+.AC DEC 100 100 100K
+
+.control
+ run
+ let OutDB=DB(VM(OUT)/VM(11))
+ write HIPASS_OUT.out OutDB
+ set appendwrite
+ *Output Ascii format data
+ wrdata HIPASS.out ac1.OutDB
+
+.endc
+.END

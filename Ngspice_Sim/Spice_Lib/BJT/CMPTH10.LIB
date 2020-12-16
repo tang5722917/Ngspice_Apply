@@ -1,0 +1,35 @@
+******
+* Spice Model
+* Item: CMPTH10
+* Date: 4/13/09
+* Revsion History: REV A
+*==========================================================
+* This model was developed by: 
+* Central Semiconductor Corp.
+* 145 Adams Avenue
+* Hauppauge, NY 11788
+*
+* These models are subject to change without notice.
+* Users may not directly or indirectly re-sell or 
+* re-distribute this model. This model may not 
+* be modified, or altered without the consent of Central Semiconductor Corp. 
+*
+* For more information on this model contact
+* Central Semiconductor Corp. at:
+* (631) 435-1110 or Engineering@centralsemi.com
+* http://www.centralsemi.com
+*===========================================================
+*
+******
+*SRC=CMPTH10;CMPTH10;BJTs NPN; Si;  30V  50.0mA  650MHz   CENTRAL TRANSISTOR
+.MODEL CMPTH10  NPN (IS=5.64955e-14 BF=257.623 NF=1.13175 VAF=22.9997
++IKF=0.00912531 ISE=1.82151e-14 NE=1.41723 BR=5.04012
++NR=1.03338 VAR=173.986 IKR=0.0912531 ISC=8.4077e-15
++NC=2.01048 RB=12.0488 IRB=0.173145 RBM=10.1231
++RE=0.070243 RC=1.0817 XTB=0.1 XTI=3.24568
++EG=1.05 CJE=1.36045e-12 VJE=0.99 MJE=2.3e-06
++TF=1e-12 XTF=1000 VTF=4.21218 ITF=0.000618395
++CJC=8.85842e-13 VJC=1.65182 MJC=0.391404 XCJC=1
++FC=0.1 CJS=0 VJS=0.75 MJS=0.5
++TR=1e-07 PTF=0 KF=0 AF=1)
+******

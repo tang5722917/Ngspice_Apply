@@ -51,5 +51,9 @@
 + FC=0.5
 +)
 *$ end model description: "awb2sc1815"
-*
-*
+**
+.model Q2sc1906 NPN(Is=269.4f Xti=3 Eg=1.11 Vaf=100 Bf=162.8 Ise=6.41p Ne=1.559
++               Ikf=.32 Nk=1.108 Xtb=1.5 Var=100 Br=1 Isc=0 Nc=2 Ikr=0 Rc=0
++               Cjc=2.429p Mjc=.3333 Vjc=.75 Fc=.5 Cje=5p Mje=.3333 Vje=.75
++               Tr=10n Tf=114.1p Itf=.4325 Xtf=114.2 Vtf=10)
+**

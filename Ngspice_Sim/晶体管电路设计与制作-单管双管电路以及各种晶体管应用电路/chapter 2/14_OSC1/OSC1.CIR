@@ -1,0 +1,44 @@
+OSC1.CIR - Twin_T type Oscillator
+* ngspice -a OSC1.CIR
+************************
+* Twin_T type Oscillator
+************************
+
+VCC 10 0 DC 12V ;Supply Voltage 
+
+R0 10 1 33K
+R1 0 1 33K
+R2 1 3 16K
+R3 2 4 6.2K
+R4 4 5 50
+R5 4 0 3.3K
+C1 2 0 0.01U IC=6V
+C2 2 3 0.01U
+C3 1 4 0.027U
+Q1 10 3 5 QC1815   ;2SC1815(Y)
+
+
+.MODEL QC1815 NPN(IS=1E-14 BF={HFE} xtb=1.7
++                 BR=3.6 VA=100 RB=50 RC=0.76
++                 IK=0.25 CJC=4.8P CJE=18P TF=0.5N TR=20N)
+.PARAM HFE = 170
+.OP
+
+.TRAN 10us 10ms 0 10us UIC
+.TEMP TP
+.control
+  *.STEP TEMP LIST 0 50
+ option TEMP = 0
+ run
+ write OSC1_Ns.out V(5)
+ set appendwrite
+
+ option TEMP = 50
+ run
+ write OSC1_Ns.out V(5)
+ set appendwrite
+
+ *Output Ascii format data
+ wrdata OSC1.out tran1.V(5) tran2.V(5)
+.endc
+.END

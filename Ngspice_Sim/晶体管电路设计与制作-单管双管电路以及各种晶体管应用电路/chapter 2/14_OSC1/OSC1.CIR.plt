@@ -22,3 +22,4 @@ set out 'OSC1.png'
 replot
 set term pop
 replot
+pause mouse

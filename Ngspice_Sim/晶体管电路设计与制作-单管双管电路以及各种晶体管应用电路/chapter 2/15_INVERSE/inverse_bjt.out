@@ -1,0 +1,18 @@
+ BJT: Bipolar Junction Transistor
+     device                    q1
+      model                qc1815
+         ic              -4.56879
+         ib                     1
+         ie               3.56879
+        vbe             -0.660801
+        vbc              0.866918
+         gm              -137.942
+        gpi                 1e-12
+        gmu               38.6624
+         gx                  0.02
+         go               137.942
+        cpi           1.46123e-11
+        cmu            2.7837e-06
+        cbx                     0
+       csub                     0
+

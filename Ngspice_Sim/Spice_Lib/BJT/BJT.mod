@@ -1,59 +1,18 @@
 *
 *$ model description: "awb2sc1815" from pspice lib 17.2
 *b Device model created by analog_uprev for 2sc1815 on Fri Feb  2 18:03:16 IST 2001
-.model QC1815 npn
-+ (
-*+ IC_VBE=1.10250E-36
-*+ IC_VCE=1.10250E-36
-*+ STATE=1
-+ TEMP=0
-+ AREA=1.0
-*+ STATE_FACTOR=0
-+ IS=4.209e-14
-+ BF=440.
-+ NF=1.00
-+ VAF=98.3
-+ IKF=0.731
-+ ISE=4.348e-15
-+ NE=1.36
-+ BR=25.4
-+ NR=1.00
-+ VAR=10.0
-+ IKR=9.663e-02
-+ ISC=3.094e-14
-+ NC=1.11
-+ RB=10.0
-+ IRB=1.000e-04
-+ RBM=1.00
-+ RE=0.834
-+ RC=3.11
-+ CJE=1.690e-11
-+ VJE=0.654
-+ MJE=0.386
-+ TF=3.628e-10
-+ XTF=1.617e04
-+ VTF=0.118
-+ ITF=0.415
-+ PTF=0
-+ CJC=7.476e-12
-+ VJC=0.300
-+ MJC=0.322
-+ XCJC=1.00
-+ TR=23E-9
-+ CJS=0
-+ VJS=0.7
-+ MJS=0.5
-+ XTB=1.235
-+ EG=1.11
-+ XTI=3.0
-+ KF=0
-+ AF=1
-+ FC=0.5
-+)
-*$ end model description: "awb2sc1815"
-**
+
+.MODEL QC1815 NPN(IS=1E-14 BF=170 xtb=1.7
++                 BR=3.6 VA=100 RB=50 RC=0.76
++                 IK=0.25 CJC=4.8P CJE=18P TF=0.5N TR=20N)
+
 .model Q2sc1906 NPN(Is=269.4f Xti=3 Eg=1.11 Vaf=100 Bf=162.8 Ise=6.41p Ne=1.559
 +               Ikf=.32 Nk=1.108 Xtb=1.5 Var=100 Br=1 Isc=0 Nc=2 Ikr=0 Rc=0
 +               Cjc=2.429p Mjc=.3333 Vjc=.75 Fc=.5 Cje=5p Mje=.3333 Vje=.75
 +               Tr=10n Tf=114.1p Itf=.4325 Xtf=114.2 Vtf=10)
+**
+*
+.model QC2240 NPN( IS=6.3E-14 BF=400
++      XTB=1.7 RB=20 TF=0.7NS TR=28NS
++      CJE=44PF CJC=7.6PF VAF=200)
 **

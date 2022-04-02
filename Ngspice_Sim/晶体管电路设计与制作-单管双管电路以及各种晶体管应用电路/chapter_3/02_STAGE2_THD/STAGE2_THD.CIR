@@ -10,26 +10,29 @@ R1 2 3 2.2K
 R2 3 6 4.7K
 R3 9 10 10K
 R4 9 4 10K
-*C2 9 5 47U  ;without boost capacitor
+*<Change> 1 *C2 9 5 47U  ;without boost capacitor
+
+*<Change> 2 C2 9 5 47U  ;with boost capacitor
+
 R5 5 6 910
 R6 6 0 100
 R7 5 7 470
 C3 7 8 220U
-RL 8 0 6K
+RL 8 0 60K
 Q1 4 3 0 QC2240
 Q2 10 4 5 QC1815
 
 .INCLUDE ../../../../Spice_Lib/BJT/BJT.mod
 .PARAM VIN = 0.01
 
-.tran 10us 2ms 0
+.tran 1us 2ms 
 
 .control
  let ymax = 0
  alterparam VIN = 0.0001
  reset
  run
- meas tran ymax RMS V(8) from=0m to=2m
+ meas tran ymax RMS V(8) from=0 to=2m
  set filetype = ascii
  Wrdata Voltage_RMS.out ymax
  set appendwrite

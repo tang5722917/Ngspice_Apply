@@ -1,0 +1,48 @@
+STAGE2_THD.CIR - Common emitter+common collector
+* stage2b - NPN + PNP
+* ngspice -a STAGE2B_THD.CIR
+
+VCC 11 0 DC 12V ;Supply Voltage 
+Vs 1 0 AC 1V sin(0 {VIN} 1KHz)
+
+R1 1 0 100K
+R2 1 2 470
+C1 2 3 3.3U
+C2 3 0 56p
+R3 11 3 100K
+R4 3 0 120K
+R5 3 4 100
+Q1 5_Q 4 6 QC2240  ;2SC2240
+Q2 7 5 11 QA1015 ;2SA1015
+CF 5 7 22P 
+R6 11 5 4.7K
+*<Change> 1 *C2 9 5 47U  ;without boost capacitor
+*<Change> 2 C2 9 5 47U  ;with boost capacitor
+R7 6 7 220
+R8 7 0 1K
+R9 7 8 220
+C3 8 9 220U
+RL 9 0 6K
+
+V_Q1_Ic 5 5_Q DC 0
+
+.INCLUDE ../../../Spice_Lib/BJT/BJT.mod
+.PARAM VIN = 0.01
+
+.control
+let ymax = 0
+alterparam VIN = 1
+reset
+run
+op 
+print ALL > STAGE2B_OP.Out
+show Q1 Q2 > STAGE2B_BJT.Out
+tran 1us 2ms 
+meas tran ymax RMS V(9) from=0 to=2m
+set filetype = ascii
+Wrdata Voltage_RMS.out ymax
+set appendwrite
+fourier 1000 V(9) > CE02_fourier1.out
+plot V(9) V(1)
+.endc
+.END

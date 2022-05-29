@@ -1,6 +1,4 @@
 *
-*$ model description: "awb2sc1815" from pspice lib 17.2
-*b Device model created by analog_uprev for 2sc1815 on Fri Feb  2 18:03:16 IST 2001
 
 .MODEL QC1815 NPN(IS=1E-14 BF=170 xtb=1.7
 +                 BR=3.6 VA=100 RB=50 RC=0.76
@@ -16,3 +14,8 @@
 +      XTB=1.7 RB=20 TF=0.7NS TR=28NS
 +      CJE=44PF CJC=7.6PF VAF=200)
 **
+*
+.model QA1015 PNP( IS=1.4E-14 BF=170
++      BR=10  VA=100  IK=0.22 RB=30
++      RC=1.4  XTB=1.3  CJC=11p
++      CJE=12p  TF=0.63n  TR=25n)

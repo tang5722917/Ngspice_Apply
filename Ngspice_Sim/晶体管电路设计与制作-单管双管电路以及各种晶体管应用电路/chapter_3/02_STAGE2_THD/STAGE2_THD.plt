@@ -4,7 +4,7 @@ set xlabel "Frequency /Hz"
 set ylabel "Gain /DB"
 set grid lw 2
 set logscale x 
-set xrange [0.01:4]
+set xrange [0.1:4]
 set logscale y 
 set yrange [0.001:100]
 #set xtics 1
@@ -14,8 +14,10 @@ set yrange [0.001:100]
 set border lw 3
 set format y "%g"
 set format x "%g"
-plot 'STAGE2_THD.CIR_result.txt' using 1:2 smooth acsplines with lines lw 3 title "Without Boost" 'weight = 60.0' ,\
-     'STAGE2_THD.CIR_result.txt' using 3:4 smooth acsplines with lines lw 3 title "With Boost" 'weight = 60.0'
+plot 'STAGE2_THD.CIR_result.txt' using 1:2 with lines lw 3 title "Without Boost 1k" ,\
+     'STAGE2_THD.CIR_result.txt' using 3:4 with lines lw 3 title "With Boost 1k" ,\
+     'STAGE2_THD_20k.CIR_result.txt' using 1:2 with lines lw 3 title "Without Boost 20k" ,\
+     'STAGE2_THD_20k.CIR_result.txt' using 3:4 with lines lw 3 title "With Boost 20k"      
 set terminal push
 set terminal png noenhanced
 set out 'STAGE2A.png'

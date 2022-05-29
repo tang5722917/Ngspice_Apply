@@ -1,4 +1,4 @@
-filename = "STAGE2_THD.CIR"
+filename = "STAGE2_THD_20k.CIR"
 min_VIN = 0.01
 max_VIN = 1
 Change_num = 2
@@ -38,7 +38,7 @@ for i in range(0,Change_num):
         result.truncate()         #如果已存在该文件，则清空文件内容
         for data_line in target.readlines():
             if " fourier" in data_line :
-                print("fourier 1000 V(8) > " + filename+"_"+str(i)+"_"+str(j)+".out.TEMP",file=result)
+                print("fourier 20000 V(8) > " + filename+"_"+str(i)+"_"+str(j)+".out.TEMP",file=result)
             elif  "Voltage_RMS.out" in data_line :
                 print(" write Voltage_RMS" +"_"+str(i)+"_"+str(j)+ ".out.TEMP ymax" ,file=result)
             elif  " alterparam VIN" in data_line :

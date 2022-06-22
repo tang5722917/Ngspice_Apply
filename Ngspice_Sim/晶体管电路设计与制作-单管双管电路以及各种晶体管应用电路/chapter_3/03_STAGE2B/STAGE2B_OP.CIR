@@ -1,6 +1,6 @@
 STAGE2_THD.CIR - Common emitter+common collector
 * stage2b - NPN + PNP
-* ngspice -a STAGE2B_THD.CIR
+* ngspice -a STAGE2B_OP.CIR
 
 VCC 11 0 DC 12V ;Supply Voltage 
 Vs 1 0 AC 1V sin(0 {VIN} 1KHz)
@@ -12,7 +12,7 @@ C2 3 0 56p
 R3 11 3 100K
 R4 3 0 120K
 R5 3 4 100
-Q1 5_Q 4 6 QC2240  ;2SC2240
+Q1 5 4 6 QC2240  ;2SC2240
 Q2 7 5 11 QA1015 ;2SA1015
 CF 5 7 22P 
 R6 11 5 4.7K

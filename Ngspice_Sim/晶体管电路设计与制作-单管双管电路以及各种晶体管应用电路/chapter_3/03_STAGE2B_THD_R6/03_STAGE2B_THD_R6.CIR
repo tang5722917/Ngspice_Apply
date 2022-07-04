@@ -1,0 +1,48 @@
+03_STAGE2B_THD_R6 - Common emitter+common collector
+* stage2b - NPN + PNP
+* ngspice -a 03_STAGE2B_THD_R6.CIR
+
+VCC 11 0 DC 12V ;Supply Voltage 
+Vs 1 0 AC 1V sin(0 {VIN} 1KHz)
+
+R1 1 0 100K
+R2 1 2 470
+C1 2 3 3.3U
+C2 3 0 56p
+R3 11 3 100K
+R4 3 0 120K
+R5 3 4 100
+Q1 5_Q 4 6 QC2240  ;2SC2240
+Q2 7 5 11 QA1015 ;2SA1015
+CF 5 7 22P 
+
+*R6 11 5 4.7K
+<Change> 1 R6 11 5 <Value>  ;Difference value of R6
+
+R7 6 7 220
+R8 7 0 1K
+R9 7 8 220
+C3 8 9 220U
+RL 9 0 6K
+
+V_Q1_Ic 5 5_Q DC 0
+.PARAM VIN = 2.92
+.INCLUDE ../../../../Spice_Lib/BJT/BJT.mod
+
+.control
+let ymax = 0
+reset
+run
+op
+*show Q1 Q2 > 03_STAGE2B_THD_R6_BJT.Out
+*print ALL > 03_STAGE2B_THD_R6_OP.Out
+alterparam VIN = 2.92
+tran 4us 1ms 0 4us 
+meas tran ymax RMS V(9) from=4us to=1m
+set filetype = ascii
+Wrdata Voltage_RMS.out ymax
+set appendwrite
+fourier 1000 V(9) > Python_fourier1.out
+*plot V(9) V(1)
+.endc
+.END

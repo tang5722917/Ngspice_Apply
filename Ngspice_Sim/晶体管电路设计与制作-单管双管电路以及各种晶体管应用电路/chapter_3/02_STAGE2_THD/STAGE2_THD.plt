@@ -1,7 +1,7 @@
 set termoption noenhanced
 set title "STAGE2A.CIR - Common emitter+common collector"
-set xlabel "Frequency /Hz"
-set ylabel "Gain /DB"
+set xlabel "V rms / V"
+set ylabel "THD /%"
 set grid lw 2
 set logscale x 
 set xrange [0.1:4]

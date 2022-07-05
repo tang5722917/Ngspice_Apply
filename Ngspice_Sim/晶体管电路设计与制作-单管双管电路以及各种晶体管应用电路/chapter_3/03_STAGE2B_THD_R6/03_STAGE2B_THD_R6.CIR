@@ -40,7 +40,6 @@ alterparam VIN = 2.92
 tran 4us 1ms 0 4us 
 meas tran ymax RMS V(9) from=4us to=1m
 set filetype = ascii
-Wrdata Voltage_RMS.out ymax
 set appendwrite
 fourier 1000 V(9) > Python_fourier1.out
 *plot V(9) V(1)

@@ -19,3 +19,9 @@
 +      BR=10  VA=100  IK=0.22 RB=30
 +      RC=1.4  XTB=1.3  CJC=11p
 +      CJE=12p  TF=0.63n  TR=25n)
+
+*2SA1114(VCBO=70V,IC=200ma,PC=500mW)
+.model QA1114 PNP (IS=1.7E-13 BF=500
++                  VA=100 IK=0.3 RB=2 XTB=1.7 
++                  CJC=32P CJE=59P TF=1.5N TR=60N
++)

@@ -1,0 +1,35 @@
+05_EMF2_AC- emf2 - NPN + PNP 2 stage emitter follower
+* ngspice -a 05_EMF2_AC.CIR
+
+VCC 7 0 DC 5V ;Supply Voltage 
+VEE 8 0 DC -5V
+VSS 1 0 AC 1 SIN(0 1V 1KHZ)
+*Vs 1 0 AC 1V sin(0 {VIN} 20KHz)
+
+R1 1 2 470  ;worst case
+R2 3 8 1K
+
+*R3 3 4 330
+*<Change> 1 R3 3 4 <Value> ;Difference value of R3
+
+
+R4 7 5 150
+R5 5 6 75
+RL 6 0 75
+Q1 7 2 3 QC1815
+Q2 8 4 5 QA1114
+
+.INCLUDE ../../../../Spice_Lib/BJT/BJT.mod
+*.PARAM VIN = 1
+
+*.TRAN 10US 1MS
+
+.control
+ run
+ op
+ *Output format Control
+ ac DEC 40 10 1G
+ let OutDB=DB(VM(6)/VM(1))
+ wrdata PYTHON_ac1.out.temp ac1.OutDB   ;Print AC data 
+.endc
+.END

@@ -1,0 +1,40 @@
+06_EMF2_THD - emf2 - NPN + PNP 2 stage emitter follower
+* ngspice -a 06_EMF2_THD.CIR
+
+VCC 7 0 DC 5V ;Supply Voltage 
+VEE 8 0 DC -5V
+VSS 1 0 AC 1 SIN(0 {VIN} 1KHZ)
+*Vs 1 0 AC 1V sin(0 {VIN} 20KHz)
+
+R1 1 2 470  ;worst case
+R2 3 8 1K
+R3 3 4 100
+
+
+R4 7 5 150
+R5 5 6 75
+
+*<Change> 1 RL 6 0 6k  ;RL = 6k
+
+*<Change> 2 RL 6 0 75  ;RL = 75
+
+Q1 7 2 3 QC1815
+Q2 8 4 5 QA1114
+
+.INCLUDE ../../../../Spice_Lib/BJT/BJT.mod
+.PARAM VIN = 1
+
+.tran 1us 2ms 
+
+.control
+ let ymax = 0
+ alterparam VIN = 0.01
+ reset
+ run
+ meas tran ymax RMS V(6) from=0 to=2m
+ set filetype = ascii
+ Wrdata Voltage_RMS.out ymax
+ set appendwrite
+fourier 1000 V(6) > PYTHON.out
+.endc
+.END

@@ -25,3 +25,8 @@
 +                  VA=100 IK=0.3 RB=2 XTB=1.7 
 +                  CJC=32P CJE=59P TF=1.5N TR=60N
 +)
+
+.model QA872A PNP （ IS=1.5E-14 BF=500
++                    RB=200  XTB=1.4 TF=1.3N TR=52N
++                    CJE=5P CJC=6.6P IK=0.025 VAF=150
++）

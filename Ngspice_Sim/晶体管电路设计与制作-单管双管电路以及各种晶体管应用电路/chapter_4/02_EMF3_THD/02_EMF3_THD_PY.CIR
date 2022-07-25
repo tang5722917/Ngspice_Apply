@@ -1,0 +1,44 @@
+06_EMF3_THD - EMF3 - 3 Tr emitter follower
+* python3 THD_cal.py
+
+VCC 6 0 DC 5V ;Supply Voltage 
+VEE 10 0 DC -5V
+VSS 1 0 AC 1 SIN(0 {VIN} 1KHZ)
+
+
+R1 1 2 47
+R2 6 5 100
+R3 4 10 1K
+R4 4 9 100
+R5 6 7 39
+R6 8 out 75
+RL out 0 6k
+CL out 0 20p 
+D1 5 3 DS1588
+Q1 3 2 4 QC1815 
+Q2 10 9 8 QA1114
+Q3 8 3 7 QA1114
+
+
+*<Change> 1 RZ out 0 75  ;RL = 75
+
+*<Change> 2 RZ out 0 100Meg  ;RL = 6k
+
+.INCLUDE ../../../../Spice_Lib/BJT/BJT.mod
+.INCLUDE ../../../../Spice_Lib/DIO/DIO.mod
+.PARAM VIN = 1
+
+.tran 5us 2ms 0 5u 
+
+.control
+ let ymax = 0
+ alterparam VIN = 1
+ reset
+ run
+ meas tran ymax RMS V(8) from=0 to=2m
+ set filetype = ascii
+ Wrdata Voltage_RMS.out ymax
+ set appendwrite
+fourier 1000 V(8) > PYTHON.out
+.endc
+.END

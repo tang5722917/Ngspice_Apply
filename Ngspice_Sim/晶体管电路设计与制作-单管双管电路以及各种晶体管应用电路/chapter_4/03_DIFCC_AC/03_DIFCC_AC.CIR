@@ -1,0 +1,41 @@
+03_DIFCC_AC - DIFCC - 4 Tr Wide Band Amp
+* ngspice -a 03_DIFCC_AC.CIR
+
+VCC VCC 0 DC 12V ;Supply Voltage 
+VEE VEE 0 DC -5V
+VS 1 0 AC 1 SIN(0 0.1V 5meg)
+
+
+R1 1 2 47
+R2 3 10 33
+R3 4 10 33
+R4 VCC 5 1K
+R5 6 OUT 51
+R6 6 7 1.5k
+R7 9 VEE 82
+RL OUT 0 1MEG
+CL OUT 0 20p 
+D1 7 8 DS1588
+D2 8 VEE DS1588
+Q1 VCC 2 3 QC1815
+Q2 5 0 4 QC1815
+Q3 10 7 9 QC1815
+Q4 VCC 5 6 QC1815
+
+.INCLUDE ../../../Spice_Lib/BJT/BJT.mod
+.INCLUDE ../../../Spice_Lib/DIO/DIO.mod
+
+
+.control
+ run
+ op
+ tran 4n 500n 0 4n
+ plot V(OUT)
+ ac DEC 20 10 100Meg
+ let OutDB=DB(VM(OUT)/VM(1))
+ plot OutDB 
+
+ 
+
+.endc
+.END

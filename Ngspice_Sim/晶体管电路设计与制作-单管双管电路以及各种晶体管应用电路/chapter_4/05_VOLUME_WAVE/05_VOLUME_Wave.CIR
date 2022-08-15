@@ -17,9 +17,9 @@ R9 OUT 0 100K
 RL OUT 0 1MEG
 CL OUT 0 300P 
 *<Change> 1 VC  8 0 <Value>
-VC  8 0 DC 0
-.INCLUDE ../../../Spice_Lib/BJT/BJT.mod
-.INCLUDE ../../../Spice_Lib/DIO/DIO.mod
+
+.INCLUDE ../../../../Spice_Lib/BJT/BJT.mod
+.INCLUDE ../../../../Spice_Lib/DIO/DIO.mod
 
 Q1 VCC 4 3 QC3381
 Q2 6 5 3 QC3381
@@ -31,7 +31,7 @@ D1 3 0 DS1588
  run
  op
  tran 10u 1000us
- plot V(OUT) V(1)
+ wrdata PYTHON_ac1.out.temp tran1.OUT   ;Print Wave data  V(OUT)
 
 .endc
 .END

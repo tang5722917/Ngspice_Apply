@@ -26,7 +26,14 @@
 +                  CJC=32P CJE=59P TF=1.5N TR=60N
 +)
 
-.model QA872A PNP （ IS=1.5E-14 BF=500
+.model QA872A PNP (IS=1.5E-14 BF=500
 +                    RB=200  XTB=1.4 TF=1.3N TR=52N
 +                    CJE=5P CJC=6.6P IK=0.025 VAF=150
-+）
++)
+
+*************   2SC3381 （Dual-Tr, VCBO=80V 
+*                   IC=100mA  PC=200mW/unit)
+.model QC3381 NPN ( IS=1E-14  IK=0.1 
++                    XTB=1.7 BF=400 RB=20 TF=0.9N 
++                    TR=36N CJE=34P CJC=18P VAF=100
++)

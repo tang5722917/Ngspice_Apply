@@ -1,0 +1,39 @@
+VOLUME - Electronic Volume 
+* ngspice -a 04_VOLUME_AC.CIR
+
+VCC VCC 0 DC +12V
+VEE VEE 0 DC -12V
+VS 1 0 AC 1V SIN(0 4 1KHZ)
+C1 1 2 4.7U
+R1 2 3 10K
+R2 3 VEE 22K
+R3 7 VEE 22K
+R4 6 VCC 10K
+R5 5 0 22
+R6 4 0 22
+R7 4 VEE 2.2K
+R8 4 8 470
+C2 OUT 6 0.22U
+R9 OUT 0 100K
+RL OUT 0 1MEG
+CL OUT 0 300P 
+*<Change> 1 VC 8 0 <Value>
+
+.INCLUDE ../../../../Spice_Lib/BJT/BJT.mod
+.INCLUDE ../../../../Spice_Lib/DIO/DIO.mod
+
+Q1 VCC 4 3 QC3381
+Q2 6 5 3 QC3381
+Q3 VCC 5 7 QC3381
+Q4 6 4 7 QC3381
+D1 3 0 DS1588
+
+.control
+ run
+ op
+ *Output format Control
+ ac DEC 20 10 100K
+ let OutDB=DB(VM(OUT)/VM(1))
+ wrdata PYTHON_ac1.out.temp ac1.OutDB   ;Print AC data 
+.endc
+.END

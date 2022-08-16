@@ -37,3 +37,7 @@
 +                    XTB=1.7 BF=400 RB=20 TF=0.9N 
 +                    TR=36N CJE=34P CJC=18P VAF=100
 +)
+
+.MODEL QC2602 NPN ( IS=1.7E-13 BF=500 XTB=1.7
++                 VA=100 IK=0.3 RB=3 CJC=21P 
++                 CJE=80P TF=0.9N TR=36N )

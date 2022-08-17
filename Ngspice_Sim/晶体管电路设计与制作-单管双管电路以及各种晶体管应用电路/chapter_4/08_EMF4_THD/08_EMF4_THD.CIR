@@ -1,9 +1,12 @@
-EMF4 - 4 Tr Emitter follower AC sim
-* ngspice -a 07_EMF4_AC.CIR
+EMF4 - 4 Tr Emitter follower THD sim
+* ngspice -a 08_EMF4_THD.CIR
 
 VCC VCC 0 DC +12V
 VEE VEE 0 DC -12V
-VS 1 0 AC 1V SIN(0 4 1KHZ)
+*<Change> 1 VS 1 0 AC 1V SIN(0 {VIN} 1KHZ )
+*<Change> 2 VS 1 0 AC 1V SIN(0 {VIN} 20HZ )
+*<Change> 3 VS 1 0 AC 1V SIN(0 {VIN} 20KHZ )
+
 R1 1 2 1K
 R2 2 3 47
 CF 3 0 10p
@@ -16,8 +19,10 @@ R8 11 OUT 47
 * 自举电容 C1 C2 可使Q1 Q2 的Vcb 交流分量接近0，进而消除米勒效应的影响
 C1 7 OUT 33U
 C2 4 OUT 33U
+
+
 RL OUT 0 6K
-*<Change> 1 CL OUT 0 <Value>
+CL OUT 0 100pF
 
 .INCLUDE ../../../../Spice_Lib/BJT/BJT.mod
 .INCLUDE ../../../../Spice_Lib/DIO/DIO.mod
@@ -28,6 +33,11 @@ Q3 VCC 6 10 QC2602
 Q4 VEE 9 11 QA1114
 D1 6 5 DS1588
 D2 8 9 DS1588
+
+.PARAM VIN = 4
+*<Change> 1 .tran 10u 2m
+*<Change> 2 .tran 100u 100m
+*<Change> 3 .tran 100n  100u
 .control
  run
  op

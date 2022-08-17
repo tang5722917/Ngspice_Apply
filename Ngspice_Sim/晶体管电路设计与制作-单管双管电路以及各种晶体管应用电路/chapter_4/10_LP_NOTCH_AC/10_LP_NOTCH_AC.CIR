@@ -1,0 +1,25 @@
+10_LP_NOTCH_AC - LOW PASS NOTCH AC sim
+* ngspice -a 10_LP_NOTCH_AC.CIR
+
+VS 1 0 AC 1
+
+R1 1 2 10K
+R2 2 3 10K
+C1 2 5 0.02U
+C2 3 0 0.01U 
+R3 4 5 25
+
+X1 3 4 BUFFER
+
+.SUBCKT BUFFER IN OUT
+EBUF OUT 0 IN 0 1.0
+.ENDS
+
+.control
+ run
+ op
+ ac DEC 40 10 1Meg
+ let OutDB=DB(VM(5)/VM(1))
+ plot OutDB 
+.endc
+.END

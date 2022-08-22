@@ -1,0 +1,35 @@
+11_OSC2_Wave - Sinusoidal Oscillator Tran sim
+* ngspice -a 11_OSC2_Wave.CIR
+* OSC output frequency = 1 / 2*pi*R1*C1 = 1026.17HZ
+VCC VCC 0 +12V 
+VEE VEE 0 -12V 
+
+R1 NI 0 4.7K
+C1 NI 0 0.033U IC=2V 
+R2 NI 1 4.7K
+C2 OUT 1 0.033U
+CF OUT CMP 56P  
+R3 INV 0 3.59K
+R4 INV OUT 7.21K
+R5 INV 2 4.7K
+
+RL OUT 0 1MEG
+CL OUT 0 300p 
+
+.INCLUDE ../../../Spice_Lib/BJT/BJT.mod
+.INCLUDE ../../../Spice_Lib/DIO/DIO.mod
+
+D1 3 2 DZ6_2
+D2 3 OUT DZ6_2
+
+.INCLUDE ../../../Spice_Lib/Module/OPA.mod
+X1 NI INV OUT CMP VCC VEE OPAMP5
+
+
+.control
+ run
+ op
+tran 10u 20m 0 10u UIC
+plot  V(OUT)
+.endc
+.END

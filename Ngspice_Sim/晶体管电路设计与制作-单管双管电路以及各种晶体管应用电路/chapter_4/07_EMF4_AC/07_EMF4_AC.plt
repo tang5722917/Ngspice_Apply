@@ -1,7 +1,7 @@
 set termoption noenhanced
 set title "EMF4 - 4 Tr Emitter follower AC sim"
-set xlabel "AC /dB"
-set ylabel "Fre / Hz"
+set xlabel "Fre / Hz"
+set ylabel "AC /dB"
 set grid lw 2
 set logscale x
 set xrange [1e+1:1e+8]

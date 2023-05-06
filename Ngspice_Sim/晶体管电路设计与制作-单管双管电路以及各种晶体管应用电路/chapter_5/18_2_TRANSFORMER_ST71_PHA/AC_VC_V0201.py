@@ -7,34 +7,35 @@ FilePath: /undefined/home/tang/EE/SPICE/Ngspice_Apply/Ngspice_Sim/晶体管电�
 Description: Python script for AC sim
              V02 -- Add the generate gnuplot script (.plt) file
                  -- Add initial netlist .control (...) .endc  instruction
+             V0201-- PHase output
 Copyright (c) 2022 by Donald Duck tang5722917@163.com, All Rights Reserved. 
 '''
 # Netlist 文件名
-filename = "07_EMF4_AC"
+filename = "02_TRANSFORMER_ST71_PHA"
 # 电路变量个数
 Change_num = 1
 # 电路变量列表
-Change_list = ["0.1u","0.01u","1000p","100p"]
+Change_list = ["2k","600"]
 # AC仿真参数
-AC_sim_para = "ac DEC 20 10 100MEG"
-# 输入电路节点
-Vout_name = "OUT"
+AC_sim_para = "ac DEC 50 10 200k"
 # 输出电路节点
+Vout_name = "VOUT"
+# 输入电路节点
 Vin_name = "1"
 
 # Gnuplot 设置
 # xy轴label
-ylabel_name = "AC /dB"
+ylabel_name = "PHASE /d"
 xlabel_name = "Fre / Hz"
 # xy轴坐标值  0：线性坐标 1：对数坐标
 xvalue_setting = 1
 yvalue_setting = 0
 # xy轴坐标范围
-xvalue = "[1e+1:1e+8]"
-yvalue = "[-120:20]"
+xvalue = "[1e+1:2e+5]"
+yvalue = "[-100:100]"
 # plot 曲线备注
-plot_title_change_name = "CL"
-plot_title_change_unit = "F"
+plot_title_change_name = "RL"
+plot_title_change_unit = "ohm"
 plot_title_start_pointx = 0.2
 plot_title_start_pointy = 0.2
 
@@ -86,8 +87,9 @@ for i in range(0,Change_num):
             else:
                 print(data_line.strip(),file=result)
         print(".control \nrun \nop \n*Output format Control \n"+ AC_sim_para,file=result)
-        print("let OutDB=DB(VM("+Vout_name+")/VM("+Vin_name+"))",file=result)
-        print("wrdata " + filename+"_"+str(i)+"_"+str(j)+".out.TEMP  ac1.OutDB   ;Print AC data ",file=result)
+        print("let VOUT = V(2) - V(3)",file=result)
+        print("let OutVP=VP("+Vout_name+")/pi*180",file=result)
+        print("wrdata " + filename+"_"+str(i)+"_"+str(j)+".out.TEMP  ac1.OutVP   ;Print AC data ",file=result)
         print(".endc \n.end" ,file=result)
         result.close()
         str_bash = 'ngspice -b -p -o '+ PATH_EXE+filename+"_"+str(i)+"_"+str(j)+".log.TEMP "+PATH_EXE+filename+"_"+str(i)+"_"+str(j)+".cir.TEMP"

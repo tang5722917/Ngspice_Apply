@@ -1,0 +1,38 @@
+PWM - Pulse Width Modulation Tran sim
+* ngspice -a PWM_2_TRAN.CIR
+.INCLUDE ../../../Spice_Lib/BJT/BJT.mod
+.INCLUDE ../../../Spice_Lib/DIO/DIO.mod
+
+VCC VCC 0 DC +12V 
+VEE VEE 0 DC -12V 
+VS 1 0 SIN(0 3V 20Hz)
+R1 1 INV1 4.7K
+R2 INV1 OUT2 10K
+R3 OUT1 NI2  4.7K
+R4 NI2  OUT2 10K
+C1 INV1 OUT1 2200p 
+CF CMP1 OUT1 150p 
+D1 INV1 0    DS1588
+D2 0 INV1    DS1588
+D3 NI2 0     DS1588
+D4 0 NI2     DS1588
+
+.INCLUDE ../../../Spice_Lib/Module/OPA.mod
+X1 0 INV1 OUT1 CMP1 VCC VEE OPAMP3
+X2 NI2 0 OUT2 CMP VCC VEE OPAMP5
+
+R5 OUT2 5  4.7K
+R6 5 6     4.7K
+R7 6 7     4.7K
+R8 7 8     4.7K
+C5 5 0     0.033u
+C6 6 0     0.033u
+C7 7 0     0.033u
+C8 8 0     0.033u
+.control
+ run
+ op
+tran 0.1m 0.1s 0
+plot  V(1)  V(8)
+.endc
+.END

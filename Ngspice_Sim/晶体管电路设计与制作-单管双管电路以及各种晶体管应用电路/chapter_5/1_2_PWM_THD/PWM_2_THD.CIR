@@ -1,11 +1,11 @@
-PWM - Pulse Width Modulation Tran sim
+PWM - Pulse Width Modulation THD sim
 * ngspice -a PWM_2_THD.CIR
-.INCLUDE ../../../Spice_Lib/BJT/BJT.mod
-.INCLUDE ../../../Spice_Lib/DIO/DIO.mod
+.INCLUDE ../../../../Spice_Lib/BJT/BJT.mod
+.INCLUDE ../../../../Spice_Lib/DIO/DIO.mod
 
 VCC VCC 0 DC +12V 
 VEE VEE 0 DC -12V 
-VS 1 0 SIN(0 3V 20Hz)
+VS 1 0 SIN(0 {VIN} 20HZ )
 R1 1 INV1 4.7K
 R2 INV1 OUT2 10K
 R3 OUT1 NI2  4.7K
@@ -17,7 +17,7 @@ D2 0 INV1    DS1588
 D3 NI2 0     DS1588
 D4 0 NI2     DS1588
 
-.INCLUDE ../../../Spice_Lib/Module/OPA.mod
+.INCLUDE ../../../../Spice_Lib/Module/OPA.mod
 X1 0 INV1 OUT1 CMP1 VCC VEE OPAMP3
 X2 NI2 0 OUT2 CMP VCC VEE OPAMP5
 
@@ -29,6 +29,8 @@ C5 5 0     0.033u
 C6 6 0     0.033u
 C7 7 0     0.033u
 C8 8 0     0.033u
+.tran 0.1m 0.1s 0
+.PARAM VIN = 1
 .control
  run
  op

@@ -16,20 +16,21 @@ D1 INV1 0    DS1588
 D2 0 INV1    DS1588
 D3 NI2 0     DS1588
 D4 0 NI2     DS1588
+R5 OUT2 4    1k
 
 .INCLUDE ../../../../Spice_Lib/Module/OPA.mod
 X1 0 INV1 OUT1 CMP1 VCC VEE OPAMP3
 X2 NI2 0 OUT2 CMP VCC VEE OPAMP5
 
-R5 OUT2 5  4.7K
-R6 5 6     4.7K
-R7 6 7     4.7K
-R8 7 8     4.7K
-C5 5 0     0.033u
-C6 6 0     0.033u
-C7 7 0     0.033u
-C8 8 0     0.033u
-.tran 0.1m 0.1s 0
+R6 4 5     4.7K
+R7 5 6     4.7K
+R8 6 7     4.7K
+R9 7 8     4.7K
+C6 5 0     0.033u
+C7 6 0     0.033u
+C8 7 0     0.033u
+C9 8 0     0.033u
+.tran 0.1m 0.1s 0 0.1m
 .PARAM VIN = 1
 .control
  run

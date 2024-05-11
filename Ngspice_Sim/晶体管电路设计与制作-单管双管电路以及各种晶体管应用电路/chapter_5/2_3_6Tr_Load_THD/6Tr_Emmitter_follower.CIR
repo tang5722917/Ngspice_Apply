@@ -1,0 +1,47 @@
+EMF6 - 6Tr Emmitter follower
+* ngspice -a  6Tr_Emmitter_follower.CIR
+
+VCC VCC 0 DC +12V
+VEE VEE 0 DC -12V
+*<Change> 1 VS 1 0 AC 1V SIN(0 7V 1KHZ )
+*<Change> 2 VS 1 0 AC 1V SIN(0 7V 20KHZ )
+R1 1 2 1K 
+R2 2 3 47
+CF 3 0 10p
+R3 VCC 8 470
+R4 7 10 1K 
+R5 VCC 9 47 
+R6 11 OUT 100
+R7 4 OUT 100
+R8 16 VEE 47 
+R9 14 17 1K 
+R10 15 VEE 470 
+R11 10 17 15K 
+R12 10 17 47K 
+
+.INCLUDE ../../../../Spice_Lib/BJT/BJT.mod
+.INCLUDE ../../../../Spice_Lib/DIO/DIO.mod
+D1 6  5    DS1588 
+D2 12 13   DS1588
+D3 9  10   DS1588  
+D4 17 16   DS1588
+Q1 4  2  5  QA1015 
+Q2 11 2  12 QC1815
+Q3 6  7  8  QA1015
+Q4 13 14 15 QC1815
+Q5 10 6  11 QC1844
+Q6 17 13 4  QA991 
+RL OUT 0 {RL_value}
+*<Change> 1 .tran 10u 2m
+*<Change> 2 .tran 100n  100u
+.PARAM RL_value = 1
+.control
+run
+op
+ *Output format Control
+ac DEC 20 10 100MEG
+let OutDB=DB(VM(OUT)/VM(1))
+plot OutDB
+ *wrdata PYTHON_ac1.out.temp ac1.OutDB   ;Print AC data 
+.endc
+.end

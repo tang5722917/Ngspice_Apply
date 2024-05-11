@@ -36,7 +36,7 @@ D2 8 9 DS1588
 
 .PARAM VIN = 4
 *<Change> 1 .tran 10u 2m
-*<Change> 2 .tran 100u 100m
+*<Change> 2 .tran 100u 200m
 *<Change> 3 .tran 100n  100u
 .control
  run

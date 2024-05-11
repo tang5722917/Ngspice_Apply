@@ -1,9 +1,9 @@
 '''
 Author: Donald Duck tang5722917@163.com
 Date: 2022-08-16 12:42:38
-LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-08-17 11:53:47
-FilePath: /undefined/home/tang/EE/SPICE/Ngspice_Apply/Ngspice_Sim/晶体管电路设计与制作-单管双管电路以及各种晶体管应用电路/chapter_4/08_EMF4_THD/THD_cal_V02.py
+LastEditors: Donald duck tang5722917@163.com
+LastEditTime: 2024-05-11 15:53:38
+FilePath: \\Ngspice_Apply\\Ngspice_Sim\晶体管电路设计与制作-单管双管电路以及各种晶体管应用电路\chapter_4\\08_EMF4_THD\THD_cal_V021.py
 Description: PYTHON script to calculate THD
              V02  -- Add the generate gnuplot script (.plt) file
                   -- Add initial netlist .control (...) .endc  instruction
@@ -68,8 +68,8 @@ if not os.path.exists("TEMP"):     #判断当前路径是否存在，没有则�
     os.makedirs("TEMP")
 PATH_EXE = SPATH + "TEMP/"
 os.chdir(PATH_EXE )         #改变当前目录
-target = open(SPATH+filename+'.CIR','r') # 打开初始Netlist
-Title_line = target.readline()  # 获得Netlist 第一行（Netlist 标题)
+target = open(SPATH+filename+'.CIR','r', encoding='utf-8') #打开初始Netlist
+Title_line = target.readline() #获得Netlist 第一行（Netlist标题)
 control_setting = 0
 # Generate and execute the netlsit
 for i in range(0,Change_num):
@@ -172,6 +172,3 @@ gnuplot_f.close()
 os.chdir(SPATH)   
 str_bash = 'gnuplot '+ SPATH + filename+".plt"
 os.system(str_bash)
-
-
-

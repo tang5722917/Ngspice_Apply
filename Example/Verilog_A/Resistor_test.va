@@ -1,0 +1,8 @@
+`include "discipline.h" 
+`include "constants.h"
+module cap (vp, vn);                        // 定义一个叫做cap的module，它有俩个端口vp和vn 
+inout vp, vn;                               // 这两个端口都是双向端口 
+parameter real c = 1p from [0: 1];          // 这个模型有一个参数c，取值为0到1F，包括两个边界 
+electrical vp, vn;                          // 定义vp和vn为两个电学节点 
+analog I(vp, vn) <+ c * ddt(V(vp, vn));     // 赋予vp和vn两个节点之间电容特性 
+endmodule

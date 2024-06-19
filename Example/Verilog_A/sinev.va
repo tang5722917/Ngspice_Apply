@@ -1,0 +1,20 @@
+// Simple sinusoidal source
+
+`include "disciplines.vams"
+`include "constants.vams"
+
+module sinev(n1,n2);
+    input n1;
+    output n2;
+    electrical n1,n2;
+    parameter real gain = 1.0;
+    parameter real freq = 5.0 from (0:inf);
+
+    analog begin
+        V(n2,n1) <+ gain * sin(2 * `M_PI * freq * $abstime);
+    // Bound the maximum time step to insure the signal is
+    // adequately represented:
+        $bound_step(0.05/freq);
+    end
+
+endmodule

@@ -3,7 +3,9 @@ CASCODE - Wide freq range amp
 
 VCC VCC 0 DC +12V
 VEE VEE 0 DC -12V
-VS 1 0 DC 0 AC 1
+*<Change> 1 VS 1 0 SIN(0 {VIN} 20HZ )
+*<Change> 2 VS 1 0 SIN(0 {VIN} 1kHZ )
+*<Change> 3 VS 1 0 SIN(0 {VIN} 20kHZ )
 R0 1 0 51
 R1 1 2 200
 R2 4 5 97
@@ -13,8 +15,8 @@ R5 7 0 200
 R6 VCC 3 300
 R7 VCC 8 300
 
-.INCLUDE ../../../Spice_Lib/BJT/BJT.mod
-.INCLUDE ../../../Spice_Lib/DIO/DIO.mod
+.INCLUDE ../../../../Spice_Lib/BJT/BJT.mod
+.INCLUDE ../../../../Spice_Lib/DIO/DIO.mod
 Q1 3  2  4  2SC1775
 Q2 8  7  6  2SC1775
 Q3 9  11 8  QA1015
@@ -36,23 +38,18 @@ Q7 VEE 17 22  QA1015
 R11 12 VEE 10K 
 R12 20 21  33 
 R13 21 22  33
-*<Change> 1 R14 21 2   2k
+R14 21 2   2k
 R15 21 OUT  51
 CL  OUT 0   20P   
 
-
-*<Change> 2 Vbias 100 0 0.0109
-*<Change> 2 LBias 100 2 10
-
+*<Change> 1 .tran 0.1m 0.1s 0 1m
+*<Change> 2 .tran 0.1u 10m 0 1u
+*<Change> 3 .tran 0.1u 10m 0 1u
+.PARAM VIN = 1
 .control
-run
- *Output format Control
-op 
-print ALL
-ac DEC 20 10 100MEG
-plot VDB(OUT)
-
-*plot V(OUT) V(1)
- *wrdata PYTHON_ac1.out.temp ac1.OutDB   ;Print AC data 
+ run
+ op
+tran 0.1m 0.1s 0
+plot  V(1)  V(8)
 .endc
-.end
+.END
